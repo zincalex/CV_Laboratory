@@ -1,0 +1,13 @@
+/home/zincalex/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/zincalex/.local/share/JetBrains/Toolbox/apps/clion/bin/ninja/linux/x64/ninja -G Ninja -S "/home/zincalex/University/Computer Vision Laboratory/Lab1/task2" -B "/home/zincalex/University/Computer Vision Laboratory/Lab1/task2/cmake-build-debug"
+-- Configuring done (0.0s)
+CMake Error at CMakeLists.txt:8 (add_executable):
+  Cannot find source file:
+
+    task1.cpp
+
+
+CMake Error at CMakeLists.txt:8 (add_executable):
+  No SOURCES given to target: task2
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.
