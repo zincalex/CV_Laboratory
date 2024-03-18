@@ -8,7 +8,8 @@ using namespace cv;
 
 int main(int argc, char** argv) {
 
-    Mat garden_img = imread("/home/zincalex/University/Computer Vision Laboratory/Lab1/Images/Garden.jpg");
+
+    Mat garden_img = imread("/home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/Images/Garden.jpg");
     cvtColor(garden_img, garden_img, COLOR_BGR2GRAY);
 
     namedWindow("Garden image grayscale");
@@ -16,7 +17,7 @@ int main(int argc, char** argv) {
     waitKey(0);
 
     // writing the image to a defined location as JPEG
-    bool check = imwrite("/home/zincalex/University/Computer Vision Laboratory/Lab1/task1/GardenModifiedGrayscale.jpg", garden_img);
+    bool check = imwrite("/home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/task1/GardenModifiedGrayscale.jpg", garden_img);
 
     // if the image is not saved
     if (!check) {

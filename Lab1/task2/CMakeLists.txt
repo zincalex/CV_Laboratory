@@ -6,6 +6,7 @@ find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 add_executable(task2 ImageFilters.cpp
-        ImageFilters.h)
+        ImageFilters.h
+        main.cpp)
 
 target_link_libraries(task2 ${OpenCV_LIBS})
