@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
     cvtColor(Lena_corr_img, Lena_corr_img, COLOR_BGR2GRAY);
     cvtColor(Astronaut_corr_img, Astronaut_corr_img, COLOR_BGR2GRAY);
 
-    int kernel_size = 1;
+    int kernel_size = 5;
 
 
     if (max_filter(Lena_corr_img, Lena_corr_img, kernel_size) != 0)
@@ -27,6 +27,8 @@ int main(int argc, char** argv) {
     namedWindow("Lena corrupted image with kernel size " + std::to_string(kernel_size));
     imshow("Lena corrupted image with kernel size " + std::to_string(kernel_size), Lena_corr_img);
     waitKey(0);
+
+   imwrite("/home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/task1/Lena.jpg", Lena_corr_img);
 
     namedWindow("Astronaut revamped image with kernel size " + std::to_string(kernel_size));
     imshow("Astronaut revamped image with kernel size " + std::to_string(kernel_size), Astronaut_corr_img);

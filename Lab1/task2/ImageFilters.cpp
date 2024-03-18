@@ -17,7 +17,7 @@ int max_filter (const cv::Mat& src, cv::Mat& out, const int& kernel_size) {
         for(int j = 0; j < src.cols; j += kernel_size) {
 
             int max_value_block = 0;
-            int temp = 0;
+            int temp;
             for(int x = 0; x < kernel_size; x++) {
                 for(int y = 0; y < kernel_size; y++) {
 
@@ -57,7 +57,7 @@ int min_filter (const cv::Mat& src, cv::Mat& out, const int& kernel_size) {
         for(int j = 0; j < src.cols; j += kernel_size) {
 
             int min_value_block = 255;
-            int temp = 255;
+            int temp;
             for(int x = 0; x < kernel_size; x++) {
                 for(int y = 0; y < kernel_size; y++) {
                     if((i+x) < src.rows && (j+y) < src.cols) {
