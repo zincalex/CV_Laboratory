@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
     waitKey(0);
 
     // writing the image to a defined location as JPEG
-    bool check = imwrite("/home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/task1/GardenModifiedGrayscale.jpg", garden_img);
+    bool check = imwrite("/home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/Images/GardenModifiedGrayscale.jpg", garden_img);
 
     // if the image is not saved
     if (!check) {

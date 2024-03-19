@@ -101,7 +101,7 @@ int median_filter(const cv::Mat& src, cv::Mat& out, const int& kernel_size) {
 
                     if((i+x) < src.rows && (j+y) < src.cols) { // In case the kernel exceeds the image size
                         kernel_elements.insert(kernel_elements.end(), src.at<unsigned char> (i+x, j+y));
-                        std::cout << std::to_string(kernel_elements.size()) << std::endl;
+                        //std::cout << std::to_string(kernel_elements.size()) << std::endl;
                     }
 
                 }

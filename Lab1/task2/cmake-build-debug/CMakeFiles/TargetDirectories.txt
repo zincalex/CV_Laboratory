@@ -1,3 +1,3 @@
-/home/zincalex/Uni/Computer Vision Laboratory/Lab1/task2/cmake-build-debug/CMakeFiles/task2.dir
-/home/zincalex/Uni/Computer Vision Laboratory/Lab1/task2/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/zincalex/Uni/Computer Vision Laboratory/Lab1/task2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/task2/cmake-build-debug/CMakeFiles/task2.dir
+/home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/task2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/task2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
