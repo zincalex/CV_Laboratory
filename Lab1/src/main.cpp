@@ -5,7 +5,7 @@
 #include <opencv4/opencv2/imgcodecs.hpp>
 #include <opencv4/opencv2/imgproc.hpp>
 #include <opencv4/opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>
+#include <opencv4/opencv2/imgproc.hpp>
 
 using namespace cv;
 
@@ -61,15 +61,47 @@ int main(int argc, char** argv)
 
 
     // Task 5
-    /*
-    MatND hist;
+    // Histogram
+    Mat hist;
     int histSize = 256;
-    float range[] = { 0, 256 };
-    const float* histRange[] = { range };
-    calcHist(&Garden_grayscale_img, 1, 0, Mat(), hist, 2, &histSize, histRange, true, false);
-     */
+    float range[] = {0, 256};
+    const float* histRange[] = {range};
+    calcHist(&Garden_grayscale_img, 1, 0, Mat(), hist, 1, &histSize, histRange, true, false);
+    int hist_width = 1024;
+    int hist_height = 800;
+    int bin_w = cvRound((double) hist_width / histSize);
+    Mat hist_img(hist_height, hist_width, CV_8UC3, Scalar(0,0,0));
+    for(int i = 1; i < histSize; i++)
+    {
+        line(hist_img, Point(bin_w * (i - 1), hist_height - cvRound(hist.at<float>(i - 1))), Point(bin_w * (i), hist_height - cvRound(hist.at<float>(i))), Scalar(255, 255, 255), 2, 8, 0);
+    }
+    namedWindow("histogram garden");
+    imshow("histogram garden", hist_img);
+    waitKey(0);
+    imwrite(PATH + "/histogram.jpg", hist_img);
+
 
     // Task 6
+    // Histogram equalization
+    Mat	GardenImg_equalized;
+    equalizeHist(Garden_grayscale_img, GardenImg_equalized);
+
+    namedWindow("Garden image equalized");
+    imshow("Garden image equalized", GardenImg_equalized);
+    waitKey(0);
+    imwrite(PATH + "/GardenImg_equalized.jpg", GardenImg_equalized);
+
+    Mat hist_equalized;
+    Mat histImage_equalized(hist_height, hist_width, CV_8UC3, cv::Scalar(0, 0, 0));
+    calcHist(&GardenImg_equalized, 1, 0, cv::Mat(), hist_equalized, 1, &histSize, histRange, true, false);
+    normalize(hist_equalized, hist_equalized, 0, histImage_equalized.rows, cv::NORM_MINMAX, -1, cv::Mat());
+    for (int i = 1; i < histSize; i++)
+    {
+        line(histImage_equalized, Point(bin_w * (i - 1), hist_height - cvRound(hist_equalized.at<float>(i - 1))), Point(bin_w * (i), hist_height - cvRound(hist_equalized.at<float>(i))), Scalar(255, 255, 255), 2, 8, 0);
+    }
+    imshow("histogram equalized", histImage_equalized);
+    waitKey(0);
+    imwrite(PATH + "/histogram_equalized.jpg", histImage_equalized);
 
     return 0;
 }
