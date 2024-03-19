@@ -84,5 +84,12 @@ int main(int argc, char** argv) {
     waitKey(0);
     imwrite("/home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/task2/GardenNoCables_gauss.jpg", Garden_modified);
 
+
+    MatND hist;
+    int histSize = 256;
+    float range[] = { 0, 256 };
+    const float* histRange[] = { range };
+    calcHist(&Garden_grayscale_img, 1, 0, Mat(), hist, 2, &histSize, histRange, true, false);
+
     return 0;
 }
