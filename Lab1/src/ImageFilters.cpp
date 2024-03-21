@@ -1,6 +1,6 @@
 #include "../include/ImageFilters.h"
 
-cv::Mat max_filter(const cv::Mat& src, const int& kernel_size)
+cv::Mat maxFilter(const cv::Mat& src, const int& kernel_size)
 {
     // Controls
     if(kernel_size % 2 == 0) throw std::invalid_argument("Error: kernel_size must be odd");
@@ -36,7 +36,7 @@ cv::Mat max_filter(const cv::Mat& src, const int& kernel_size)
     return out;
 }
 
-cv::Mat min_filter(const cv::Mat& src, const int& kernel_size)
+cv::Mat minFilter(const cv::Mat& src, const int& kernel_size)
 {
     // Controls
     if(kernel_size % 2 == 0) throw std::invalid_argument("Error: kernel_size must be odd");
@@ -71,7 +71,7 @@ cv::Mat min_filter(const cv::Mat& src, const int& kernel_size)
     return out;
 }
 
-cv::Mat median_filter(const cv::Mat& src, const int& kernel_size)
+cv::Mat medianFilter(const cv::Mat& src, const int& kernel_size)
 {
     // Controls
     if(kernel_size % 2 == 0) throw std::invalid_argument("Error: kernel_size must be odd");
