@@ -1,3 +1,0 @@
-/home/zincalex/Uni/Computer-Vision-Laboratory/Filters and Histograms/cmake-build-debug/CMakeFiles/Lab2.dir
-/home/zincalex/Uni/Computer-Vision-Laboratory/Filters and Histograms/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/zincalex/Uni/Computer-Vision-Laboratory/Filters and Histograms/cmake-build-debug/CMakeFiles/rebuild_cache.dir
