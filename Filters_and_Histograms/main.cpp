@@ -1,11 +1,9 @@
 #include "include/ImageFilters.h"
 #include "string"
-#include "iostream"
 
 #include <opencv4/opencv2/imgcodecs.hpp>
 #include <opencv4/opencv2/imgproc.hpp>
 #include <opencv4/opencv2/highgui.hpp>
-#include <opencv4/opencv2/imgproc.hpp>
 
 using namespace cv;
 
@@ -63,7 +61,7 @@ int main(int argc, char** argv)
     imwrite(PATH + "/Astronaut_gauss_" + std::to_string(KS_gauss) + ".png", Astronaut_modified);
     imwrite(PATH + "/Garden_gauss_" + std::to_string(KS_gauss) + ".jpg", Garden_modified);
 
-    /*
+
     // Task 5
     // Histogram
     Mat hist;
@@ -105,6 +103,6 @@ int main(int argc, char** argv)
     imshow("histogram equalized", histImage_equalized);
     waitKey(0);
     imwrite(PATH + "/histogram_equalized.jpg", histImage_equalized);
-    */
+
     return 0;
 }
