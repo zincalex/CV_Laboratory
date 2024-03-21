@@ -57,10 +57,10 @@ RM = /home/zincalex/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x6
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/task2
+CMAKE_SOURCE_DIR = /home/zincalex/Uni/Computer-Vision-Laboratory/Lab1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/task2/cmake-build-debug
+CMAKE_BINARY_DIR = /home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/task2/cmake-build-debug/CMakeFiles /home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/task2/cmake-build-debug//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/cmake-build-debug/CMakeFiles /home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/cmake-build-debug//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/task2/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/zincalex/Uni/Computer-Vision-Laboratory/Lab1/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,48 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named task2
+# Target rules for targets named Lab2
 
 # Build rule for target.
-task2: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 task2
-.PHONY : task2
+Lab2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Lab2
+.PHONY : Lab2
 
 # fast build rule for target.
-task2/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/build
-.PHONY : task2/fast
-
-ImageFilters.o: ImageFilters.cpp.o
-.PHONY : ImageFilters.o
-
-# target to build an object file
-ImageFilters.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/ImageFilters.cpp.o
-.PHONY : ImageFilters.cpp.o
-
-ImageFilters.i: ImageFilters.cpp.i
-.PHONY : ImageFilters.i
-
-# target to preprocess a source file
-ImageFilters.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/ImageFilters.cpp.i
-.PHONY : ImageFilters.cpp.i
-
-ImageFilters.s: ImageFilters.cpp.s
-.PHONY : ImageFilters.s
-
-# target to generate assembly for a file
-ImageFilters.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/ImageFilters.cpp.s
-.PHONY : ImageFilters.cpp.s
+Lab2/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/build
+.PHONY : Lab2/fast
 
 main.o: main.cpp.o
 .PHONY : main.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -166,7 +142,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -174,8 +150,32 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+src/ImageFilters.o: src/ImageFilters.cpp.o
+.PHONY : src/ImageFilters.o
+
+# target to build an object file
+src/ImageFilters.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/src/ImageFilters.cpp.o
+.PHONY : src/ImageFilters.cpp.o
+
+src/ImageFilters.i: src/ImageFilters.cpp.i
+.PHONY : src/ImageFilters.i
+
+# target to preprocess a source file
+src/ImageFilters.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/src/ImageFilters.cpp.i
+.PHONY : src/ImageFilters.cpp.i
+
+src/ImageFilters.s: src/ImageFilters.cpp.s
+.PHONY : src/ImageFilters.s
+
+# target to generate assembly for a file
+src/ImageFilters.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/src/ImageFilters.cpp.s
+.PHONY : src/ImageFilters.cpp.s
 
 # Help Target
 help:
@@ -185,13 +185,13 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... task2"
-	@echo "... ImageFilters.o"
-	@echo "... ImageFilters.i"
-	@echo "... ImageFilters.s"
+	@echo "... Lab2"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/ImageFilters.o"
+	@echo "... src/ImageFilters.i"
+	@echo "... src/ImageFilters.s"
 .PHONY : help
 
 
