@@ -7,24 +7,26 @@
 
 using namespace cv;
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
     if (argc < 2) return -1;
     std::string PATH = argv[1]; // path to Images folder
 
+
     // Task 1
     //
-    Mat Garden_grayscale = imread(PATH + "/Garden_Grayscale.jpg");
+    Mat Garden_grayscale = imread(PATH + "/Garden.jpg");
     cvtColor(Garden_grayscale, Garden_grayscale, COLOR_BGR2GRAY);
     namedWindow("Garden grayscale");
     imshow("Garden grayscale", Garden_grayscale);
     waitKey(0);
+    imwrite(PATH + "/Garden_grayscale.jpg", Garden_grayscale);
+
 
     // Task 2
     // Max or Min filter
     int KS_maxORmin = 3;
-    int KS_median = 3;
-    int KS_gauss = 13;
+    int KS_median = 9;
+    int KS_gauss = 3;
 
     Mat Lena_corr_img = imread(PATH + "/Lena_corrupted.png");
     Mat Astronaut_corr_img = imread(PATH + "/Astronaut_salt_pepper.png");
