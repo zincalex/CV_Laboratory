@@ -1,14 +1,17 @@
 #include <opencv4/opencv2/imgcodecs.hpp>
 #include <opencv4/opencv2/highgui.hpp>
-#include <iostream>
 #include <cmath>
+#include <filesystem>
 
 using namespace cv;
 
 static void Mask_onMouse(int event, int col, int row, int flags, void* param) {
     Mat& img = *((Mat*)param); //cast and deref the param
-    int kernel_size = 9;
+    Vec3b whitepixel = Vec3b(255,255,255);
+    Vec3b blackpixel = Vec3b(0,0,0);
+    Mat mask (img.rows, img.cols, CV_8UC3);
 
+    int kernel_size = 9;
     if (event == EVENT_LBUTTONDOWN) {
         int mean_B = 0;
         int mean_G = 0;
@@ -24,14 +27,11 @@ static void Mask_onMouse(int event, int col, int row, int flags, void* param) {
             }
         }
 
-        mean_B = mean_B / (kernel_size * kernel_size);
-        mean_G = mean_G / (kernel_size * kernel_size);
-        mean_R = mean_R / (kernel_size * kernel_size);
+        mean_B /= (kernel_size * kernel_size);
+        mean_G /= (kernel_size * kernel_size);
+        mean_R /= (kernel_size * kernel_size);
 
-        Vec3b whitepixel = Vec3b(255,255,255);
-        Vec3b blackpixel = Vec3b(0,0,0);
-        Mat mask (img.rows, img.cols, CV_8UC3);
-        int T = 75; // Threshold
+        int T = 60; // Threshold
         for(int i = 0; i < img.rows; i++) {
             for(int j = 0; j < img.cols; j++) {
                 if( abs((img.at<Vec3b>(i, j)[0] - mean_B)) <= T && abs((img.at<Vec3b>(i, j)[1] - mean_G)) <= T && abs((img.at<Vec3b>(i, j)[2] - mean_R)) <= T) {
@@ -48,8 +48,9 @@ static void Mask_onMouse(int event, int col, int row, int flags, void* param) {
 }
 
 int main(int argc, char** argv) {
-    // Task 3
-    Mat robocup = imread("/home/zincalex/Uni/Computer-Vision-Laboratory/Mouse_Callback_and_Color_Segmentation/robocup.jpg");
+    // Task 4
+    std::filesystem::path pathImage = std::filesystem::absolute(argv[1]);
+    Mat robocup = imread(pathImage);
     namedWindow("Robot cup");
     imshow("Robot cup", robocup);
     setMouseCallback("Robot cup", Mask_onMouse, &robocup);

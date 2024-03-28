@@ -1,15 +1,15 @@
 #include <opencv4/opencv2/imgcodecs.hpp>
 #include <opencv4/opencv2/highgui.hpp>
 #include <opencv4/opencv2/imgproc.hpp>
-#include <iostream>
 #include <cmath>
+#include <filesystem>
 
 using namespace cv;
 
-static void Mask_HSV_conv_onMouse(int event, int col, int row, int flags, void* param) {
+static void Mask_HSV_onMouse(int event, int col, int row, int flags, void* param) {
     Mat& img = *((Mat*)param); //cast and deref the param
     Mat img_HSV;
-    Mat mask (img.rows, img.cols, CV_8UC1);
+    Mat mask (img.rows, img.cols, CV_8UC1); // Different from before, now is better since the mask has only white or black pixel (grayscale sufficient)
 
     cvtColor(img, img_HSV, COLOR_BGR2HSV);
     namedWindow("Robot HSV");
@@ -35,8 +35,7 @@ static void Mask_HSV_conv_onMouse(int event, int col, int row, int flags, void* 
         mean_S /= (kernel_size * kernel_size);
         mean_V /= (kernel_size * kernel_size);
 
-
-        int T = 55; // Threshold
+        int T = 50; // Threshold
         for(int i = 0; i < img_HSV.rows; i++) {
             for(int j = 0; j < img_HSV.cols; j++) {
                 if (abs((img_HSV.at<Vec3b>(i, j)[0] - mean_H)) <= T &&
@@ -56,10 +55,11 @@ static void Mask_HSV_conv_onMouse(int event, int col, int row, int flags, void* 
 
 int main(int argc, char** argv) {
     // Task 5
-    Mat robocup = imread("/home/zincalex/Uni/Computer-Vision-Laboratory/Mouse_Callback_and_Color_Segmentation/robocup.jpg");
+    std::filesystem::path pathImage = std::filesystem::absolute(argv[1]);
+    Mat robocup = imread(pathImage);
     namedWindow("Robot cup");
     imshow("Robot cup", robocup);
-    setMouseCallback("Robot cup", Mask_HSV_conv_onMouse, &robocup);
+    setMouseCallback("Robot cup", Mask_HSV_onMouse, &robocup);
     waitKey(0);
 
     return 0;

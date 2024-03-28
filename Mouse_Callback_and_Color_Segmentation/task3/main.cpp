@@ -1,6 +1,7 @@
 #include <opencv4/opencv2/imgcodecs.hpp>
 #include <opencv4/opencv2/highgui.hpp>
 #include <iostream>
+#include <filesystem>
 
 using namespace cv;
 
@@ -27,12 +28,14 @@ static void BGR_mean9x9_onMouse(int event, int col, int row, int flags, void* pa
         std::cout << "mean B= " <<  (sum_B / (9*9)) << std::endl;
         std::cout << "mean G= " << (sum_G / (9*9)) << std::endl;
         std::cout << "mean R= " << (sum_R / (9*9)) << std::endl;
+        std::cout << "------------------" << std::endl;
     }
 }
 
 int main(int argc, char** argv) {
     // Task 3
-    Mat robocup = imread("/home/zincalex/Uni/Computer-Vision-Laboratory/Mouse_Callback_and_Color_Segmentation/robocup.jpg");
+    std::filesystem::path pathImage = std::filesystem::absolute(argv[1]);
+    Mat robocup = imread(pathImage);
     namedWindow("Robot cup");
     imshow("Robot cup", robocup);
     setMouseCallback("Robot cup", BGR_mean9x9_onMouse, &robocup);

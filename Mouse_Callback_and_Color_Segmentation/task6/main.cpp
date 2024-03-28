@@ -1,12 +1,11 @@
 #include <opencv4/opencv2/imgcodecs.hpp>
 #include <opencv4/opencv2/highgui.hpp>
-#include <opencv4/opencv2/imgproc.hpp>
-#include <iostream>
 #include <cmath>
+#include <filesystem>
 
 using namespace cv;
 
-static void Mask_HSV_conv_onMouse(int event, int col, int row, int flags, void* param) {
+static void colorMask_onMouse(int event, int col, int row, int flags, void* param) {
     Mat& img = *((Mat*)param); //cast and deref the param
     Mat mask (img.rows, img.cols, CV_8UC1);
     Mat new_img(img.rows, img.cols, CV_8UC3);
@@ -31,7 +30,7 @@ static void Mask_HSV_conv_onMouse(int event, int col, int row, int flags, void* 
         mean_G /= (kernel_size * kernel_size);
         mean_R /= (kernel_size * kernel_size);
 
-        int T = 55; // Threshold 60
+        int T = 50; // Threshold
         for (int i = 0; i < img.rows; i++) {
             for (int j = 0; j < img.cols; j++) {
                 if (abs((img.at<Vec3b>(i, j)[0] - mean_B)) <= T &&
@@ -42,6 +41,7 @@ static void Mask_HSV_conv_onMouse(int event, int col, int row, int flags, void* 
             }
         }
 
+        // Task 6
         Vec3b sub_color = Vec3b(92, 37, 201);
         for (int i = 0; i < new_img.rows; i++) {
             for (int j = 0; j < new_img.cols; j++) {
@@ -50,21 +50,20 @@ static void Mask_HSV_conv_onMouse(int event, int col, int row, int flags, void* 
                 else new_img.at<Vec3b>(i, j) = sub_color;
             }
         }
-
-
         namedWindow("Robot Cup Color changed based on mask");
         imshow("Robot Cup Color changed based on mask", new_img);
-        imwrite("/home/zincalex/Uni/Computer-Vision-Laboratory/Mouse_Callback_and_Color_Segmentation/NEW_robocup.jpg",new_img);
+        //imwrite("/home/zincalex/Uni/Computer-Vision-Laboratory/Mouse_Callback_and_Color_Segmentation/NEW_robocup.jpg",new_img);
         waitKey(0);
     }
 }
 
 int main(int argc, char** argv) {
-    // Task 5
-    Mat robocup = imread("/home/zincalex/Uni/Computer-Vision-Laboratory/Mouse_Callback_and_Color_Segmentation/robocup.jpg");
+    // Task 6
+    std::filesystem::path pathImage = std::filesystem::absolute(argv[1]);
+    Mat robocup = imread(pathImage);
     namedWindow("Robot cup");
     imshow("Robot cup", robocup);
-    setMouseCallback("Robot cup", Mask_HSV_conv_onMouse, &robocup);
+    setMouseCallback("Robot cup", colorMask_onMouse, &robocup);
     waitKey(0);
 
     return 0;
