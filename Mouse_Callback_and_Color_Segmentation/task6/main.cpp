@@ -30,7 +30,7 @@ static void colorMask_onMouse(int event, int col, int row, int flags, void* para
         mean_G /= (kernel_size * kernel_size);
         mean_R /= (kernel_size * kernel_size);
 
-        int T = 50; // Threshold
+        int T = 55; // Threshold
         for (int i = 0; i < img.rows; i++) {
             for (int j = 0; j < img.cols; j++) {
                 if (abs((img.at<Vec3b>(i, j)[0] - mean_B)) <= T &&

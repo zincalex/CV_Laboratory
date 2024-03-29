@@ -35,7 +35,7 @@ static void Mask_HSV_onMouse(int event, int col, int row, int flags, void* param
         mean_S /= (kernel_size * kernel_size);
         mean_V /= (kernel_size * kernel_size);
 
-        int T = 50; // Threshold
+        int T = 55; // Threshold
         for(int i = 0; i < img_HSV.rows; i++) {
             for(int j = 0; j < img_HSV.cols; j++) {
                 if (abs((img_HSV.at<Vec3b>(i, j)[0] - mean_H)) <= T &&
