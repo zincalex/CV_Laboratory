@@ -2,79 +2,45 @@
 #include <opencv4/opencv2/imgcodecs.hpp>
 #include <opencv4/opencv2/highgui.hpp>
 #include <filesystem>
+#include "iostream"
 
 using namespace cv;
 
-Mat street, street_gray;
-Mat dst, detected_edges, cdst, cdstP;
+int main(int argc, char** argv) { // Task 3
 
-int lowThreshold = 75;
-int ratio = 109;
-int kernel_size = 5;
-int T_H = 128;
+    // From task 1 the following values are the best for what is the purpose of task 3
+    int lowThreshold = 75;
+    int ratio = 109;
+    int kernel_size = 5;
+    const char* window_name = "Canny Edge Detector Image";
 
+    Mat street, street_gray, canny_img;
 
-const int max_lowThreshold = 100;
-const int max_ratioThreshold = 110;
-const int max_kernelThreshold = 7;
-const char* window_name = "Canny Edge Detector Image";
-
-static void HoughTransform_CannyThreshold(int, void*) {
-    if(kernel_size % 2 == 0)
-        kernel_size -= 1;
-
-    GaussianBlur(street_gray, detected_edges, Size(kernel_size,kernel_size), 0);
-    Canny( detected_edges, detected_edges, lowThreshold, lowThreshold*ratio, kernel_size );
-
-
-    cvtColor(detected_edges, cdst, COLOR_GRAY2BGR);
-
-    // Standard Hough Line Transform
-    std::vector<Vec2f> lines; // will hold the results of the detection
-    HoughLines(detected_edges, lines, 1, CV_PI/180, T_H, 0, 0 ); // runs the actual detection
-    // Draw the lines
-    for( size_t i = 0; i < lines.size(); i++ )
-    {
-        float rho = lines[i][0], theta = lines[i][1];
-        Point pt1, pt2;
-        double a = cos(theta), b = sin(theta);
-        double x0 = a*rho, y0 = b*rho;
-        pt1.x = cvRound(x0 + 1000*(-b));
-        pt1.y = cvRound(y0 + 1000*(a));
-        pt2.x = cvRound(x0 - 1000*(-b));
-        pt2.y = cvRound(y0 - 1000*(a));
-        line( street, pt1, pt2, Scalar(0,0,255), 1, LINE_AA);
-    }
-
-    for(int i = 0; i < cdst.rows; i++) {
-        for(int j = 0; j < cdst.cols; j++) {
-            if(cdst.at<Vec3b>(i, j)[2] == 255) {
-
-            }
-        }
-    }
-
-
-    dst = Scalar::all(0);
-    street.copyTo( dst, detected_edges);
-    imshow( window_name, street);
-}
-
-int main(int argc, char** argv) {
-    // Task 1
     std::filesystem::path pathImage = std::filesystem::absolute(argv[1]);
     street = imread(pathImage);
     namedWindow(window_name, WINDOW_AUTOSIZE);
-    dst.create( street.size(), street.type() );
 
     cvtColor( street, street_gray, COLOR_BGR2GRAY );
-    createTrackbar( "Min Threshold:", window_name, &lowThreshold, max_lowThreshold, HoughTransform_CannyThreshold);
-    createTrackbar( "Kernel size:", window_name, &kernel_size, max_kernelThreshold, HoughTransform_CannyThreshold);
-    createTrackbar( "Ratio:", window_name, &ratio, max_ratioThreshold, HoughTransform_CannyThreshold);
-    //setTrackbarPos( "Min Threshold:", window_name, lowThreshold);
-    HoughTransform_CannyThreshold(0, 0);
-    waitKey(0);
+    GaussianBlur(street_gray, canny_img, Size(kernel_size,kernel_size), 0);
+    Canny( canny_img, canny_img, lowThreshold, lowThreshold*ratio, kernel_size );
 
+    std::vector<Vec2f> llane;
+    std::vector<Vec2f> rlane;
+    HoughLines(canny_img, llane, 1, CV_PI/180, 128, 0, 0, 0, CV_PI / 3); // 128 to select stronger lines
+    HoughLines(canny_img, rlane, 1, CV_PI/180, 128, 0, 0, -CV_PI / 3, 0);
+    Vec2f lline = llane[0];
+    Vec2f rline = rlane[0];
+    float lrho = lline[0], ltheta = lline[1], rrho = rline[0], rtheta = rline[1];
+
+    for(int y = 0; y < street.rows; y++) {
+        for(int x = 0; x < street.cols; x++) { // Given the parameters in polar coordinate, the next formula allows me to work with cartesian coordinate
+            if(y > lrho / sin(ltheta) - x / tan(ltheta) && y > rrho / sin(rtheta) - x / tan(rtheta))
+                street.at<Vec3b>(y,x) = Vec3b(0,0,255);
+        }
+    }
+
+    imshow( window_name, canny_img);
+    waitKey(0);
     return 0;
 }
 
