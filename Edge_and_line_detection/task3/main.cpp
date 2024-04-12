@@ -2,12 +2,10 @@
 #include <opencv4/opencv2/imgcodecs.hpp>
 #include <opencv4/opencv2/highgui.hpp>
 #include <filesystem>
-#include "iostream"
 
 using namespace cv;
 
 int main(int argc, char** argv) { // Task 3
-
     // From task 1 the following values are the best for what is the purpose of task 3
     int lowThreshold = 75;
     int ratio = 109;
@@ -33,13 +31,13 @@ int main(int argc, char** argv) { // Task 3
     float lrho = lline[0], ltheta = lline[1], rrho = rline[0], rtheta = rline[1];
 
     for(int y = 0; y < street.rows; y++) {
-        for(int x = 0; x < street.cols; x++) { // Given the parameters in polar coordinate, the next formula allows me to work with cartesian coordinate
+        for(int x = 0; x < street.cols; x++) { // Given the parameters in polar coordinate, the next formula allows to work with cartesian coordinates
             if(y > lrho / sin(ltheta) - x / tan(ltheta) && y > rrho / sin(rtheta) - x / tan(rtheta))
                 street.at<Vec3b>(y,x) = Vec3b(0,0,255);
         }
     }
 
-    imshow( window_name, canny_img);
+    imshow( window_name, street);
     waitKey(0);
     return 0;
 }
