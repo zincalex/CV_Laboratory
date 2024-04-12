@@ -9,7 +9,7 @@ const int max_lowThreshold = 100;
 const int max_ratioThreshold = 100;
 const int max_kernelThreshold = 7;
 const char* window_name = "Canny Edge Detector Image";
-typedef struct ParamsCanny {
+struct ParamsCanny {
     Mat street, street_gray;
     Mat streetCanny_overlapping, canny_img;
 
