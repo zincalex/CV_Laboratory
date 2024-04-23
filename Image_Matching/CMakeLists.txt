@@ -6,6 +6,9 @@ find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 add_executable(imageMatching
-        main.cpp)
+        main.cpp
+        include/FeatureMatchers.h
+        src/FeatureMatchers.cpp
+)
 
 target_link_libraries(imageMatching ${OpenCV_LIBS})
