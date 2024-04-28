@@ -1,3 +1,0 @@
-/home/zincalex/Uni/CV_Laboratory/Edge_and_line_detection/task1/cmake-build-debug/CMakeFiles/task1.dir
-/home/zincalex/Uni/CV_Laboratory/Edge_and_line_detection/task1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/zincalex/Uni/CV_Laboratory/Edge_and_line_detection/task1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
